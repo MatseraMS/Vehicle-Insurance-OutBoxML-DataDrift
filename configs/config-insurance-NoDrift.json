@@ -1,0 +1,204 @@
+{
+  "group_name": "example",
+  "project": "CarInsurance",
+  "version": "1.1",
+  "data_config": {
+    "source": "parquet",
+    "local_name_source": "/home/jovyan/work/examples/vehicle_insurance/data/insurance.parquet",
+    "table_name_source": "public.'Insurance'",
+    "separation" : {
+      "kind": "date",        
+      "random_state": 42,
+      "test_train_proportion": 0.2,
+      "train_period": ["2015-01-01", "2017-12-31"],
+      "test_period": ["2018-01-01", "2019-01-01"],
+      "period_column": ["Date_start_contract"]
+    },
+    "extra_columns": [],
+    "data": {
+        "targetslices": []
+    } 
+  },
+  "models_configs": [
+        {
+            "name": "first",
+            "objective": "RMSE",
+            "wrapper": "catboost",
+            "params_catboost": {
+                  "iterations": 1000, 
+                  "learning_rate": 0.03, 
+                  "depth": 6,
+                  "l2_leaf_reg": 3,
+                  "random_seed": 42
+                },
+            "column_target": "TARGET",
+            "relative_features": [],
+            "features": [
+                {
+                    "name": "Policies_in_force",
+                    "default": 1.0,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 1.0,
+                        "max_value": 9.0
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "Max_products",
+                    "default": 1.0,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 1.0,
+                        "max_value": 3.0
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "Type_risk",
+                    "default": 3.0,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 1.0,
+                        "max_value": 4.0
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "Power",
+                    "default": 90.0,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 0.0,
+                        "max_value": 306.0
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "N_doors",
+                    "default": 5.0,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 0.0,
+                        "max_value": 6.0
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "Length",
+                    "default": 4.188,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 2.695,
+                        "max_value": 6.56
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "Driving_experience",
+                    "default": 23.9,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 0.0,
+                        "max_value": 56.84460000000108
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "Vehicle_age",
+                    "default": 12.0,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 0.0,
+                        "max_value": 57.0
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "Type_fuel",
+                    "default": "_NAN_",
+                    "replace": {
+                        "P": "_NOTCHANGED_",
+                        "D": "_NOTCHANGED_",
+                        "None": "_NOTCHANGED_"
+                    },
+                    "clip": null,
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "WoE_cat_to_num",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": {
+                        "_NAN_": -63.11969758809509,
+                        "P": -7.921547290427895,
+                        "D": 6.391150761451925
+                    }
+                }
+            ],
+            "intersections": null,
+            "params_catboost": null,
+            "params_glm": null,
+            "params": null,
+            "treatment_dict": null,
+            "cat_features_catboost": null,
+            "data_filter_condition": null
+        }
+  ]
+}
+

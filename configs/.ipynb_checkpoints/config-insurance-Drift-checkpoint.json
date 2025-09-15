@@ -1,0 +1,187 @@
+{
+  "group_name": "example",
+  "project": "CarInsurance",
+  "version": "1.1",
+  "data_config": {
+    "source": "parquet",
+    "local_name_source": "/home/jovyan/work/examples/vehicle_insurance/data/insurance.parquet",
+    "table_name_source": "public.'Insurance'",
+    "separation" : {
+      "kind": "date",        
+      "random_state": 42,
+      "test_train_proportion": 0.2,
+      "train_period": ["2015-01-01", "2017-12-31"],
+      "test_period": ["2018-01-01", "2019-01-01"],
+      "period_column": ["Date_start_contract"]
+    },
+    "extra_columns": [],
+    "data": {
+        "targetslices": []
+    } 
+  },
+  "models_configs": [
+        {
+            "name": "first",
+            "objective": "RMSE",
+            "wrapper": "catboost",
+            "params_catboost": {
+                  "iterations": 1000, 
+                  "learning_rate": 0.03, 
+                  "depth": 6,
+                  "l2_leaf_reg": 3,
+                  "random_seed": 42
+                },
+            "column_target": "TARGET",
+            "relative_features": [],
+            "features": [
+                {
+                    "name": "Seniority",
+                    "default": 4.0,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 1.0,
+                        "max_value": 38.0
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "Max_policies",
+                    "default": 2.0,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 1.0,
+                        "max_value": 10.0
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "Lapse",
+                    "default": 0.0,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 0.0,
+                        "max_value": 3.0
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "Premium",
+                    "default": 292.28,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 41.12554,
+                        "max_value": 1284.5089600000083
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "Year_matriculation",
+                    "default": 2005.0,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 1960.0,
+                        "max_value": 2018.0
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "Cylinder_capacity",
+                    "default": 1598.0,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 49.0,
+                        "max_value": 4966.0
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "Driving_experience",
+                    "default": 23.9,
+                    "replace": {
+                        "_TYPE_": "_NUM_"
+                    },
+                    "clip": {
+                        "min_value": 0.0,
+                        "max_value": 56.84460000000108
+                    },
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "to_float",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": null
+                },
+                {
+                    "name": "Type_fuel",
+                    "default": "_NAN_",
+                    "replace": {
+                        "P": "_NOTCHANGED_",
+                        "D": "_NOTCHANGED_",
+                        "None": "_NOTCHANGED_"
+                    },
+                    "clip": null,
+                    "cut_number": null,
+                    "fillna": null,
+                    "encoding": "WoE_cat_to_num",
+                    "optbinning_params": null,
+                    "bins": null,
+                    "mapping": {
+                        "_NAN_": -63.11969758809509,
+                        "P": -7.921547290427895,
+                        "D": 6.391150761451925
+                    }
+                }
+            ],
+            "intersections": null,
+            "params_catboost": null,
+            "params_glm": null,
+            "params": null,
+            "treatment_dict": null,
+            "cat_features_catboost": null,
+            "data_filter_condition": null
+        }
+  ]
+}
+

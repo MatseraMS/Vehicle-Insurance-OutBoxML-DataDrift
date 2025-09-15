@@ -1,0 +1,32 @@
+{
+  "group_name": "example",
+  "project": "CarInsurance",
+  "version": "1",
+  "data_config": {
+    "source": "parquet",
+    "local_name_source": "/home/jovyan/work/examples/vehicle_insurance/data/insurance.parquet",
+    "table_name_source": "public.'Insurance'",
+    "separation" : {
+        "kind": "random", 
+        "random_state": 1, 
+        "test_train_proportion": 0.2,
+        "period_column": []
+    },
+    "extra_columns": [],
+    "data": {
+        "targetslices": []
+    } 
+  },
+  "models_configs": [
+    {
+      "name": "first",
+      "column_target": "TARGET",
+      "objective": "RMSE",
+      "wrapper": "catboost",
+      "relative_features": [],
+      "features": [ 
+      ]
+    }
+  ]
+}
+

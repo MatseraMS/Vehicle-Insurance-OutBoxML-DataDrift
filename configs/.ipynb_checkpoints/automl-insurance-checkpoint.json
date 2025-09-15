@@ -1,0 +1,32 @@
+{
+  "group_name": "CarInsurance",
+  "project": "CarInsurance",
+  "version": "1.2",
+  "feature_selection": {
+        "top_feautures_to_select": 10,
+        "count_category": 100,
+        "cutoff_1_category":  0.99,
+        "cutoff_nan": 0.7,
+        "max_corr_value":0.8,
+        "metric_eval":  {"first": "neg_mean_absolute_error"},
+        "cv_diff_value":  0.15,
+        "encoding_cat":  "WoE_cat_to_num",
+        "encoding_num":  "to_float",
+        "params": {"iterations": 200},
+        "features_to_ignore":  ["Cost_claims_year_new", "Cost_claims_year", "Claim_to_premium_ratio", "R_Claims_history", "ID", "N_claims_year", "N_claims_history",
+        "Seniority", "Premium", "Lapse"]
+  },
+
+  "hp_tune": {"metric_score": {"first": "neg_mean_absolute_error"}},
+  "inference_criteria": {"prod_models_folder": "models",
+                               "metric_growth_value": {"CompareBusinessMetric":  0.001},
+                                "threshold":  [0.6, 0.8],
+                                "calculate_threshold": 0,
+                                "prod_path": null},
+
+  "mlflow_experiment": "Insurance",
+  "grafana_table_name": "Insurance",
+  "dashboard_name": "Insurance",
+  "trigger": {"table_name":  "public.'Insurance'", "field":  "ID"}
+}
+
